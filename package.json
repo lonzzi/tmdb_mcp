@@ -1,5 +1,5 @@
 {
-  "name": "tmdb_mcp",
+  "name": "@lonzzi/tmdb-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for searching movies on TMDB",
   "main": "build/index.js",
@@ -9,8 +9,12 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build"
   },
+  "files": [
+    "build"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
