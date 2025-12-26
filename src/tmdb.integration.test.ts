@@ -10,7 +10,7 @@ const apiKey = process.env.TMDB_API_KEY;
 // Conditional describe: Only run if API key is present
 const describeIfApiKey = apiKey ? describe : describe.skip;
 
-describeIfApiKey("TMDB Integration Tests (Real API Requests)", () => {
+describeIfApiKey("TMDB Integration Tests", () => {
   // Increase timeout for real network requests
   jest.setTimeout(30000);
 
