@@ -16,7 +16,7 @@ export interface TmdbTvShow {
   vote_average: number;
 }
 
-export const searchMovies = async (apiKey: string, query: string): Promise<string> => {
+export const searchMovies = async (apiKey: string, query: string): Promise<TmdbMovie[]> => {
   if (!query) {
     throw new Error("Query argument is required");
   }
@@ -31,20 +31,7 @@ export const searchMovies = async (apiKey: string, query: string): Promise<strin
       },
     });
 
-    const movies: TmdbMovie[] = response.data.results.slice(0, 5); // Limit to top 5 results
-
-    if (movies.length === 0) {
-      return `No movies found for query: "${query}"`;
-    }
-
-    const formattedResults = movies
-      .map(
-        (movie) =>
-          `Title: ${movie.title}\nID: ${movie.id}\nURL: https://www.themoviedb.org/movie/${movie.id}\nRelease Date: ${movie.release_date}\nRating: ${movie.vote_average}\nOverview: ${movie.overview}\n---`
-      )
-      .join("\n");
-
-    return formattedResults;
+    return response.data.results.slice(0, 5); // Limit to top 5 results
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(`TMDB API Error: ${error.message}`);
@@ -53,7 +40,7 @@ export const searchMovies = async (apiKey: string, query: string): Promise<strin
   }
 };
 
-export const searchTvShows = async (apiKey: string, query: string): Promise<string> => {
+export const searchTvShows = async (apiKey: string, query: string): Promise<TmdbTvShow[]> => {
   if (!query) {
     throw new Error("Query argument is required");
   }
@@ -68,19 +55,7 @@ export const searchTvShows = async (apiKey: string, query: string): Promise<stri
       },
     });
 
-    const tvShows: TmdbTvShow[] = response.data.results.slice(0, 5);
-
-    if (tvShows.length === 0) {
-      return `No TV shows found for query: "${query}"`;
-    }
-
-    const formattedResults = tvShows
-      .map(
-        (show) =>
-          `Name: ${show.name}\nID: ${show.id}\nURL: https://www.themoviedb.org/tv/${show.id}\nFirst Air Date: ${show.first_air_date}\nRating: ${show.vote_average}\nOverview: ${show.overview}\n---`
-      )
-      .join("\n");
-    return formattedResults;
+    return response.data.results.slice(0, 5);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(`TMDB API Error: ${error.message}`);

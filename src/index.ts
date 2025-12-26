@@ -34,7 +34,7 @@ server.registerTool(
         content: [
           {
             type: "text",
-            text: result,
+            text: JSON.stringify(result, null, 2),
           },
         ],
       };
@@ -68,7 +68,7 @@ server.registerTool(
         content: [
           {
             type: "text",
-            text: result,
+            text: JSON.stringify(result, null, 2),
           },
         ],
       };
