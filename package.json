@@ -1,6 +1,6 @@
 {
   "name": "@lonzzi/tmdb-mcp-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MCP server for searching movies on TMDB",
   "main": "build/index.js",
   "bin": {
