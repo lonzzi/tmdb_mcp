@@ -28,7 +28,7 @@ To use this server with Claude Desktop, add it to your `claude_desktop_config.js
   "mcpServers": {
     "tmdb": {
       "command": "npx",
-      "args": ["@lonzzi/tmdb-mcp-server"],
+      "args": ["-y", "@lonzzi/tmdb-mcp-server"],
       "env": {
         "TMDB_API_KEY": "your_api_key_here"
       }

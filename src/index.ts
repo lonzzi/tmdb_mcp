@@ -3,7 +3,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import dotenv from "dotenv";
-import { searchMovies, searchTvShows } from "./tmdb";
+import { searchMovies, searchTvShows, validateApiKey } from "./tmdb";
 
 dotenv.config();
 
@@ -88,6 +88,13 @@ server.registerTool(
 );
 
 const main = async () => {
+  try {
+    await validateApiKey(API_KEY);
+  } catch (error: any) {
+    console.error("Failed to validate TMDB_API_KEY:", error.message);
+    process.exit(1);
+  }
+
   const transport = new StdioServerTransport();
   await server.connect(transport);
 };

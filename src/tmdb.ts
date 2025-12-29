@@ -63,3 +63,18 @@ export const searchTvShows = async (apiKey: string, query: string): Promise<Tmdb
     throw error;
   }
 };
+
+export const validateApiKey = async (apiKey: string): Promise<void> => {
+  try {
+    await axios.get("https://api.themoviedb.org/3/configuration", {
+      params: {
+        api_key: apiKey,
+      },
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      throw new Error("Invalid TMDB_API_KEY. Please check your API key.");
+    }
+    throw error;
+  }
+};
